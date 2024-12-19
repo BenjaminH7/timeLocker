@@ -56,16 +56,23 @@ const Form: React.FC = () => {
         icloudPassword: "",
         generatedCode: generateCode(),
       });
-    } catch (error: any) {
-      setError(error.message);
-      console.error("Error:", error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+        console.error("Error:", error.message);
+      } else {
+        setError("An unknown error occurred.");
+        console.error("An unknown error occurred.");
+      }
     } finally {
       setIsSubmitting(false);
     }
   };
+
   if (!session?.user) {
     return "You have to be connected to access to this page.";
   }
+
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit} className="gap-x-2">
