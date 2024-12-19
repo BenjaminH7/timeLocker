@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         icloudEmail,
         icloudPassword,
         generatedCode: parsedCode,
-        userId: session.user.id, // Use parsed integer
+        userId: session.user?.id ?? null, // Ensure userId is either a string or null
       },
     });
 
