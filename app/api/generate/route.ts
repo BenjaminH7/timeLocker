@@ -31,7 +31,12 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       );
     }
-
+    if (!session.user?.id) {
+      return NextResponse.json(
+        { error: "User not authenticated." },
+        { status: 403 }
+      );
+    }
     // Insert into the database
     const newTimeLimit = await prisma.timeLimit.create({
       data: {
@@ -39,7 +44,7 @@ export async function POST(req: NextRequest) {
         icloudEmail,
         icloudPassword,
         generatedCode: parsedCode,
-        userId: session.user?.id ?? null, // Ensure userId is either a string or null
+        userId: session.user.id,
       },
     });
 
