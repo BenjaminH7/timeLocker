@@ -47,7 +47,6 @@ const Form: React.FC = () => {
         throw new Error(errorData.error || "An unknown error occurred.");
       }
 
-      const result = await response.json();
       setSuccess(formData.generatedCode);
 
       // Optionally reset form:

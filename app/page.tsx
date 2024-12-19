@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Form from "./components/Form";
 import { SessionProvider } from "next-auth/react";
 
